@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.7.5/immutable.min.js"></script>
+  </head>
+  <body>
+    <template id="person-template">
+      <div class="person">
+        <h1 data-bind="text: name"></h1>
+        <p>Born <!-- ko text: born --><!-- /ko --></p>
+        <p>Profession: <!-- ko text: role --><!-- /ko --></p>
+      </div>
+    </template>
+
+    <template id="immutable-person-template">
+      <div class="person">
+        <h1 data-bind="text: $data.get('name')"></h1>
+        <p>Born <!-- ko text: $data.get('born') --><!-- /ko --></p>
+        <p>Profession: <!-- ko text: $data.get('role') --><!-- /ko --></p>
+      </div>
+    </template>
+
+    <section id="mutable-target">
+      <header><h1>Mutable</h1></header>
+      <ul>
+        <li>
+          The writer was
+          <!-- ko template: { name: 'person-template', data: writer } --><!-- /ko -->
+        </li>
+        <li>
+          The painter was
+          <!-- ko template: { name: 'person-template', data: painter } --><!-- /ko -->
+        </li>
+      </ul>
+    </section>
+
+    <section id="immutable-target">
+      <header><h1>Immutable</h1></header>
+      <ul>
+        <li>
+          The writer was
+          <!-- ko template: { name: 'immutable-person-template', data: writer } --><!-- /ko -->
+        </li>
+        <li>
+          The painter was
+          <!-- ko template: { name: 'immutable-person-template', data: painter } --><!-- /ko -->
+        </li>
+      </ul>
+    </section>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
